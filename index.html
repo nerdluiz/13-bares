@@ -138,13 +138,13 @@ const DAYS = [
   ]},
   {id:"sab", title:"Dia 4", region:"Osasco", stops:[
     {t:"16:00",n:"Boteco Galeria do Nei",a:"Av. Santo Antônio, 1687 – Vila Osasco, Osasco",h:"Horário: a partir das 15h",tip:"Boteco estreito, cheio de antiguidades.",lat:-23.5417144,lng:-46.778064,pid:"ChIJLdW7v3L_zpQRyGJsNmwcnJU"},
-    {t:"18:30",n:"Bar do Guina",a:"R. Lilás, 10 – Jardim das Flores, Osasco",h:"Horário não informado no Google",tip:"Uns 1,5 km do Nei. Confirme se está aberto antes.",lat:-23.5410336,lng:-46.789625,pid:"ChIJSWqEF6H_zpQRdWriyJWliAs"}
+    {t:"18:30",n:"Bar do Guina",a:"R. Lilás, 10 – Jardim das Flores, Osasco",h:"Horário não informado no Google",tip:"Uns 1,5 km do Nei. Confirme se está aberto antes.",lat:-23.5410336,lng:-46.789625,pid:"ChIJSWqEF6H_zpQRdWriyJWliAs",url:"https://maps.app.goo.gl/HqxQMxpXf5quCwup7",route:"R. Lilás, 10 - Jardim das Flores, Osasco - SP, 06120-090"}
   ]}
 ];
 
 const enc=s=>encodeURIComponent(s);
-const q=s=>`${s.n}, ${s.a}`;
-const placeUrl=s=>`https://www.google.com/maps/search/?api=1&query=${enc(q(s))}&query_place_id=${s.pid}`;
+const q=s=>s.route||`${s.n}, ${s.a}`;
+const placeUrl=s=>s.url||`https://www.google.com/maps/search/?api=1&query=${enc(q(s))}&query_place_id=${s.pid}`;
 function routeUrl(day){
   const st=day.stops, mid=st.slice(1,-1).map(q).join("|");
   let u=`https://www.google.com/maps/dir/?api=1&origin=${enc(q(st[0]))}&destination=${enc(q(st[st.length-1]))}`;
